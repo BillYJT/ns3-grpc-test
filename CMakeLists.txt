@@ -86,8 +86,8 @@ endif()
 
 set(examples_as_tests_sources)
 if(${ENABLE_EXAMPLES})
-    set(examples_as_tests_sources    
-        #test/grpc-test-examples-test-suite.cc
+    set(examples_as_tests_sources
+            test/grpc-test-test-suite.cc
         )
 endif()    
 
@@ -96,9 +96,12 @@ build_lib(
     SOURCE_FILES model/grpc-test.cc
                  helper/grpc-test-helper.cc 
     HEADER_FILES model/grpc-test.h
+                 model/proto_generated_file/helloworld.grpc.pb.h
+                 model/proto_generated_file/helloworld.pb.h
                  helper/grpc-test-helper.h
     LIBRARIES_TO_LINK ${link_libs} 
     TEST_SOURCES test/grpc-test-test-suite.cc
                  ${examples_as_tests_sources}
 )
     
+include_directories(${proto_gen_dir})
